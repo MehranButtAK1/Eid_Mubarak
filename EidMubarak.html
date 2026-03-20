@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Eid Mubarak Rooma 🌙</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>
+html, body {margin:0; padding:0; height:100%; overflow:hidden; font-family:'Segoe UI',sans-serif;}
+body {
+  display:flex; justify-content:center; align-items:center;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:white; transition:background 1s;
+}
+.card {
+  text-align:center; padding:50px; border-radius:20px;
+  background:rgba(255,255,255,0.06); backdrop-filter:blur(14px);
+  box-shadow:0 0 60px rgba(0,0,0,0.6); max-width:520px; width:90%;
+  position:relative; overflow:hidden;
+  animation:fadeIn 2s ease-in-out;
+}
+h1{font-size:46px; margin-bottom:10px; letter-spacing:2px; color:#ffe2a8;}
+.name{font-size:24px; margin-bottom:20px; color:#f5d08a; opacity:0.95;}
+p{font-size:17px; line-height:1.6; opacity:0.85;}
+button{
+  margin-top:25px; padding:12px 28px; border:none; border-radius:30px;
+  background:#f5d08a; color:#333; font-size:15px; cursor:pointer; transition:.3s;
+}
+button:hover{transform:scale(1.05); background:#ffe2a8;}
+.message{margin-top:25px; font-size:20px; line-height:1.7; display:none; color:#f8e7c1;}
+.typing{border-right:2px solid #f5d08a; white-space:nowrap; overflow:hidden; width:0; animation:typing 3s steps(30,end) forwards;}
+@keyframes typing{from{width:0} to{width:100%}}
+@keyframes fadeIn{from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
+.star{position:absolute; width:2px; height:2px; background:white; animation:twinkle 3s infinite;}
+@keyframes twinkle{0%,100%{opacity:0.2;}50%{opacity:1;}}
+.glow{animation:glow 2s ease-in-out infinite alternate;}
+@keyframes glow{0%{text-shadow:0 0 10px #f5d08a,0 0 20px #f5d08a,0 0 30px #f5d08a;}100%{text-shadow:0 0 30px #ffe2a8,0 0 50px #ffe2a8,0 0 70px #ffe2a8;}}
+.hearts-container {position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden;}
+.confetti-container {position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden;}
+.end-msg {margin-top:15px; font-size:20px; color:#ffe2a8; opacity:0; transition:opacity 2s;}
+</style>
+</head>
+<body>
+
+<div class="card">
+<h1 class="glow">🌙 Eid Mubarak Rooma 🌙</h1>
+<div class="name typing">Specially For Rooma… 🤭😊🥰💞❤️‍🩹</div>
+<p>Some people come into life quietly… and change everything.</p>
+
+<button onclick="showMessage()">Open Wishes ✨</button>
+
+<div class="message" id="msg">
+Rooma…<br><br>
+🌟 <strong>Eid Mubarak!</strong> 🌟<br>
+I hope this Eid brings you endless happiness, smiles, and magical moments.<br>
+You are not just someone special to me…<br>
+you are a feeling I never knew I needed.<br><br>
+In the simplest moments…<br>
+you become the most beautiful part of my day.<br><br>
+You truly matter to me.<br>
+More than words will ever be enough for.<br><br>
+<span style="font-size:18px; opacity:0.85;">Eid Mubarak meri Bandrii🥹 🐒 (Jerry🥹) 🫠</span>
+</div>
+
+<div style="margin-top:25px;"><button onclick="startQuestions()">One more thing…</button></div>
+
+<div id="q1" style="display:none; margin-top:20px; font-size:18px; color:#f8e7c1;">
+Ap mery se kabhii naraz nhii hoon gii naww? 🫠🥹<br><br>
+<button onclick="goToQ2()">Haan nhii hoon gii</button>
+<button onclick="noResponse()">No</button>
+<div id="q1Reply" style="margin-top:15px; color:#f5d08a;"></div>
+</div>
+
+<div id="q2" style="display:none; margin-top:20px; font-size:18px; color:#f8e7c1;">
+Can I be your favorite too? 🥹<br><br>
+<button onclick="finalAnswer()">Yes</button>
+<button id="noBtn" onmouseover="moveButton()">No</button>
+</div>
+
+<div id="finalMsg1" class="end-msg"></div>
+<div id="finalMsg2" class="end-msg"></div>
+
+<div class="hearts-container" id="heartsContainer"></div>
+<div class="confetti-container" id="confettiContainer"></div>
+
+</div>
+
+<script>
+let noCount = 0;
+function showMessage(){document.getElementById("msg").style.display="block";}
+function startQuestions(){document.getElementById("q1").style.display="block";}
+function noResponse(){
+noCount++;
+let reply="";
+if(noCount===1) reply="sooch lein 🔪";
+else if(noCount===2) reply="dobara soch lein 🥹";
+else if(noCount===3) reply="phir se soch lein 🥹";
+else if(noCount===4) reply="ek baar phir se soch lein 😭";
+else if(noCount===5) reply="ek baar aur soch lein 😭😭😭";
+else if(noCount===6) reply="😭😭😭😭😭😭😭😭😭😭";
+else reply="Bandriii jiii, koi nii hona naraz sharaz 😭😭😭😭😭😭";
+document.getElementById("q1Reply").innerText = reply;
+}
+function goToQ2(){
+document.getElementById("q1").style.display="none";
+document.getElementById("q2").style.display="block";
+}
+function moveButton(){
+let btn=document.getElementById("noBtn");
+btn.style.position="absolute";
+btn.style.top=Math.random()*80+"%";
+btn.style.left=Math.random()*80+"%";
+}
+function finalAnswer(){
+document.body.style.background="linear-gradient(135deg, #203a43, #0f2027, #2c5364)";
+let nameElem=document.querySelector(".name");
+nameElem.classList.add("glow");
+
+// Hearts animation
+let heartsContainer=document.getElementById("heartsContainer");
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.innerText="💖";
+heart.style.position="absolute";
+heart.style.left=Math.random()*100+"%";
+heart.style.bottom="-30px";
+heart.style.fontSize="16px";
+heart.style.opacity=Math.random()*0.7+0.3;
+heartsContainer.appendChild(heart);
+setTimeout(()=>{heart.style.bottom="100%"; heart.style.opacity=0;},50);
+setTimeout(()=>{heart.remove();},3000);
+},500);
+
+// Confetti burst
+let confettiContainer=document.getElementById("confettiContainer");
+setInterval(()=>{
+let conf=document.createElement("div");
+conf.innerText=["🎉","✨","💫"][Math.floor(Math.random()*3)];
+conf.style.position="absolute";
+conf.style.left=Math.random()*100+"%";
+conf.style.top="-20px";
+conf.style.fontSize=(Math.random()*24+12)+"px";
+conf.style.opacity=Math.random()*0.8+0.2;
+conf.style.transform="rotate("+Math.random()*360+"deg)";
+confettiContainer.appendChild(conf);
+setTimeout(()=>{
+conf.style.top="100%";
+conf.style.opacity=0;
+},50);
+setTimeout(()=>{conf.remove();},3000);
+},300);
+
+// Sequential emotional end messages
+setTimeout(()=>{
+let final1=document.getElementById("finalMsg1");
+final1.innerText="Rooma, ap meri duniya ka sabse pyara ehsaas hein 🥹🌙";
+final1.style.opacity=1;
+},500);
+
+setTimeout(()=>{
+let final2=document.getElementById("finalMsg2");
+final2.innerText="Rooma, ap meri zindagi ka sabse khoobsurat hissa hein 🥹💖";
+final2.style.opacity=1;
+},2500);
+}
+
+// Stars background
+for(let i=0;i<70;i++){
+let star=document.createElement("div");
+star.className="star";
+star.style.top=Math.random()*100+"vh";
+star.style.left=Math.random()*100+"vw";
+star.style.animationDuration=(Math.random()*2+2)+"s";
+document.body.appendChild(star);
+}
+</script>
+</body>
+</html>
