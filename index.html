@@ -3,22 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Eid Mubarak Rooma 🌙</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-html, body {margin:0; padding:0; height:100%; overflow:hidden; font-family:'Segoe UI',sans-serif;}
-body {
-  display:flex; justify-content:center; align-items:center;
+html, body {
+  margin:0; padding:0; height:100%; font-family:'Segoe UI',sans-serif;
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color:white; transition:background 1s;
+  color:white; transition:background 5s ease;
 }
+body { display:flex; justify-content:center; align-items:center; overflow-x:hidden; position:relative; cursor:none; }
+
 .card {
   text-align:center; padding:50px; border-radius:20px;
   background:rgba(255,255,255,0.06); backdrop-filter:blur(14px);
-  box-shadow:0 0 60px rgba(0,0,0,0.6); max-width:520px; width:90%;
-  position:relative; overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,0.6);
+  max-width:1024px; width:90%; position:relative; overflow:hidden;
   animation:fadeIn 2s ease-in-out;
 }
-h1{font-size:46px; margin-bottom:10px; letter-spacing:2px; color:#ffe2a8;}
+h1{font-size:46px; margin-bottom:10px; letter-spacing:2px; color:#ffe2a8; text-shadow:0 0 15px #ffe2a8;}
 .name{font-size:24px; margin-bottom:20px; color:#f5d08a; opacity:0.95;}
 p{font-size:17px; line-height:1.6; opacity:0.85;}
 button{
@@ -30,13 +31,31 @@ button:hover{transform:scale(1.05); background:#ffe2a8;}
 .typing{border-right:2px solid #f5d08a; white-space:nowrap; overflow:hidden; width:0; animation:typing 3s steps(30,end) forwards;}
 @keyframes typing{from{width:0} to{width:100%}}
 @keyframes fadeIn{from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);}}
-.star{position:absolute; width:2px; height:2px; background:white; animation:twinkle 3s infinite;}
-@keyframes twinkle{0%,100%{opacity:0.2;}50%{opacity:1;}}
 .glow{animation:glow 2s ease-in-out infinite alternate;}
 @keyframes glow{0%{text-shadow:0 0 10px #f5d08a,0 0 20px #f5d08a,0 0 30px #f5d08a;}100%{text-shadow:0 0 30px #ffe2a8,0 0 50px #ffe2a8,0 0 70px #ffe2a8;}}
-.hearts-container {position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden;}
-.confetti-container {position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden;}
-.end-msg {margin-top:15px; font-size:20px; color:#ffe2a8; opacity:0; transition:opacity 2s;}
+.hearts-container, .confetti-container, .stars-container, .sparkles-container, .particles-container, .cursor-effects {position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:hidden;}
+.end-msg {margin-top:15px; font-size:20px; color:#ffe2a8; opacity:0; transition:opacity 2s; text-shadow:0 0 10px #f5d08a;}
+.star{position:absolute; width:2px; height:2px; background:white; border-radius:50%; opacity:0; animation:twinkle 3s infinite;}
+@keyframes twinkle{0%,100%{opacity:0.2;}50%{opacity:1;}}
+
+/* Responsive adjustments */
+@media(max-width:768px){
+  h1{font-size:32px;}
+  .name{font-size:18px;}
+  p{font-size:14px;}
+  button{font-size:13px; padding:10px 20px;}
+  .card{padding:30px;}
+}
+@media(max-width:480px){
+  h1{font-size:28px;}
+  .name{font-size:16px;}
+  p{font-size:13px;}
+  button{font-size:12px; padding:8px 16px;}
+  .card{padding:20px;}
+}
+.cursor-dot {
+  width:12px; height:12px; background:#ffe2a8; border-radius:50%; position:absolute; pointer-events:none; transform:translate(-50%,-50%); box-shadow:0 0 10px #ffe2a8;
+}
 </style>
 </head>
 <body>
@@ -64,14 +83,14 @@ More than words will ever be enough for.<br><br>
 <div style="margin-top:25px;"><button onclick="startQuestions()">One more thing…</button></div>
 
 <div id="q1" style="display:none; margin-top:20px; font-size:18px; color:#f8e7c1;">
-Ap mery se kabhii naraz nhii hoon gii naww? 🫠🥹<br><br>
+Ap mery se kabhii b pakka wla naraz nii hoon gii naww😭😭? 🫠🥹<br><br>
 <button onclick="goToQ2()">Haan nhii hoon gii</button>
-<button onclick="noResponse()">No</button>
+<button onclick="noResponse()">No hoon gii</button>
 <div id="q1Reply" style="margin-top:15px; color:#f5d08a;"></div>
 </div>
 
 <div id="q2" style="display:none; margin-top:20px; font-size:18px; color:#f8e7c1;">
-Can I be your favorite too? 🥹<br><br>
+Can I be your favorite too? 🌝🥹🥹🫠<br><br>
 <button onclick="finalAnswer()">Yes</button>
 <button id="noBtn" onmouseover="moveButton()">No</button>
 </div>
@@ -81,11 +100,16 @@ Can I be your favorite too? 🥹<br><br>
 
 <div class="hearts-container" id="heartsContainer"></div>
 <div class="confetti-container" id="confettiContainer"></div>
+<div class="stars-container" id="starsContainer"></div>
+<div class="sparkles-container" id="sparklesContainer"></div>
+<div class="particles-container" id="particlesContainer"></div>
+<div class="cursor-effects" id="cursorEffects"></div>
 
+<div class="cursor-dot" id="cursorDot"></div>
 </div>
 
 <script>
-let noCount = 0;
+let noCount=0;
 function showMessage(){document.getElementById("msg").style.display="block";}
 function startQuestions(){document.getElementById("q1").style.display="block";}
 function noResponse(){
@@ -94,84 +118,63 @@ let reply="";
 if(noCount===1) reply="sooch lein 🔪";
 else if(noCount===2) reply="dobara soch lein 🥹";
 else if(noCount===3) reply="phir se soch lein 🥹";
-else if(noCount===4) reply="ek baar phir se soch lein 😭";
-else if(noCount===5) reply="ek baar aur soch lein 😭😭😭";
+else if(noCount===4) reply="ek baar phir se soch lein 😒";
+else if(noCount===5) reply="ek baar aur soch lein 😞😞";
 else if(noCount===6) reply="😭😭😭😭😭😭😭😭😭😭";
 else reply="Bandriii jiii, koi nii hona naraz sharaz 😭😭😭😭😭😭";
-document.getElementById("q1Reply").innerText = reply;
+document.getElementById("q1Reply").innerText=reply;
 }
-function goToQ2(){
-document.getElementById("q1").style.display="none";
-document.getElementById("q2").style.display="block";
-}
-function moveButton(){
-let btn=document.getElementById("noBtn");
-btn.style.position="absolute";
-btn.style.top=Math.random()*80+"%";
-btn.style.left=Math.random()*80+"%";
-}
+function goToQ2(){document.getElementById("q1").style.display="none";document.getElementById("q2").style.display="block";}
+function moveButton(){let btn=document.getElementById("noBtn");btn.style.position="absolute";btn.style.top=Math.random()*80+"%";btn.style.left=Math.random()*80+"%";}
 function finalAnswer(){
 document.body.style.background="linear-gradient(135deg, #203a43, #0f2027, #2c5364)";
-let nameElem=document.querySelector(".name");
-nameElem.classList.add("glow");
+let nameElem=document.querySelector(".name"); nameElem.classList.add("glow");
 
-// Hearts animation
-let heartsContainer=document.getElementById("heartsContainer");
-setInterval(()=>{
-let heart=document.createElement("div");
-heart.innerText="💖";
-heart.style.position="absolute";
-heart.style.left=Math.random()*100+"%";
-heart.style.bottom="-30px";
-heart.style.fontSize="16px";
-heart.style.opacity=Math.random()*0.7+0.3;
-heartsContainer.appendChild(heart);
-setTimeout(()=>{heart.style.bottom="100%"; heart.style.opacity=0;},50);
-setTimeout(()=>{heart.remove();},3000);
-},500);
+// Hearts, confetti, stars, sparkles & particles
+let hearts=document.getElementById("heartsContainer");
+setInterval(()=>{let h=document.createElement("div"); h.innerText="💖"; h.style.position="absolute"; h.style.left=Math.random()*100+"%"; h.style.bottom="-30px"; h.style.fontSize="16px"; h.style.opacity=Math.random()*0.7+0.3; hearts.appendChild(h); setTimeout(()=>{h.style.bottom="100%";h.style.opacity=0;},50); setTimeout(()=>{h.remove();},3000);},500);
 
-// Confetti burst
-let confettiContainer=document.getElementById("confettiContainer");
-setInterval(()=>{
-let conf=document.createElement("div");
-conf.innerText=["🎉","✨","💫"][Math.floor(Math.random()*3)];
-conf.style.position="absolute";
-conf.style.left=Math.random()*100+"%";
-conf.style.top="-20px";
-conf.style.fontSize=(Math.random()*24+12)+"px";
-conf.style.opacity=Math.random()*0.8+0.2;
-conf.style.transform="rotate("+Math.random()*360+"deg)";
-confettiContainer.appendChild(conf);
-setTimeout(()=>{
-conf.style.top="100%";
-conf.style.opacity=0;
-},50);
-setTimeout(()=>{conf.remove();},3000);
-},300);
+let conf=document.getElementById("confettiContainer");
+setInterval(()=>{let c=document.createElement("div"); c.innerText=["🎉","✨","💫"][Math.floor(Math.random()*3)]; c.style.position="absolute"; c.style.left=Math.random()*100+"%"; c.style.top="-20px"; c.style.fontSize=(Math.random()*24+12)+"px"; c.style.opacity=Math.random()*0.8+0.2; c.style.transform="rotate("+Math.random()*360+"deg)"; conf.appendChild(c); setTimeout(()=>{c.style.top="100%"; c.style.opacity=0;},50); setTimeout(()=>{c.remove();},3000);},300);
 
-// Sequential emotional end messages
-setTimeout(()=>{
-let final1=document.getElementById("finalMsg1");
-final1.innerText="Rooma, ap meri duniya ka sabse pyara ehsaas hein 🥹🌙";
-final1.style.opacity=1;
-},500);
+let stars=document.getElementById("starsContainer");
+for(let i=0;i<100;i++){let s=document.createElement("div"); s.className="star"; s.style.top=Math.random()*100+"%"; s.style.left=Math.random()*100+"%"; s.style.animationDuration=(Math.random()*3+2)+"s"; stars.appendChild(s);}
 
-setTimeout(()=>{
-let final2=document.getElementById("finalMsg2");
-final2.innerText="Rooma, ap meri zindagi ka sabse khoobsurat hissa hein 🥹💖";
-final2.style.opacity=1;
-},2500);
+let sparkles=document.getElementById("sparklesContainer");
+setInterval(()=>{let sp=document.createElement("div"); sp.innerText="✨"; sp.style.position="absolute"; sp.style.left=Math.random()*100+"%"; sp.style.top=Math.random()*100+"%"; sp.style.fontSize=(Math.random()*16+10)+"px"; sp.style.opacity=Math.random()*0.6+0.4; sparkles.appendChild(sp); setTimeout(()=>{sp.remove();},2000);},300);
+
+let particles=document.getElementById("particlesContainer");
+setInterval(()=>{let p=document.createElement("div"); p.innerText="💫"; p.style.position="absolute"; p.style.left=Math.random()*100+"%"; p.style.top=Math.random()*100+"%"; p.style.fontSize=(Math.random()*12+8)+"px"; p.style.opacity=Math.random()*0.4+0.3; particles.appendChild(p); setTimeout(()=>{p.remove();},4000);},400);
+
+// End messages
+setTimeout(()=>{let f1=document.getElementById("finalMsg1"); f1.innerText="Rooma, ap meri duniya ka sabse pyara ehsaas hein 🥹🌙"; f1.style.opacity=1;},500);
+setTimeout(()=>{let f2=document.getElementById("finalMsg2"); f2.innerText="Rooma, ap meri zindagi ka sabse khoobsurat hissa hein 🥹💖"; f2.style.opacity=1;},2500);
 }
 
-// Stars background
-for(let i=0;i<70;i++){
-let star=document.createElement("div");
-star.className="star";
-star.style.top=Math.random()*100+"vh";
-star.style.left=Math.random()*100+"vw";
-star.style.animationDuration=(Math.random()*2+2)+"s";
-document.body.appendChild(star);
-}
+// Background gradient animation
+let colors=[["#0f2027","#203a43","#2c5364"],["#1a1a2e","#162447","#1f4068"],["#0b0c10","#1f2833","#4b4b4b"]];
+let i=0;
+setInterval(()=>{i=(i+1)%colors.length; document.body.style.background=`linear-gradient(135deg,${colors[i][0]},${colors[i][1]},${colors[i][2]})`;},8000);
+
+// Cursor magic
+const cursorDot=document.getElementById("cursorDot");
+const cursorEffects=document.getElementById("cursorEffects");
+document.addEventListener("mousemove", e=>{
+  cursorDot.style.left=e.clientX+"px"; cursorDot.style.top=e.clientY+"px";
+  // Sparkles follow cursor
+  let sp=document.createElement("div"); sp.innerText="✨"; sp.style.position="absolute"; sp.style.left=(e.clientX+Math.random()*20-10)+"px"; sp.style.top=(e.clientY+Math.random()*20-10)+"px"; sp.style.fontSize=(Math.random()*10+8)+"px"; sp.style.opacity=Math.random()*0.5+0.3; cursorEffects.appendChild(sp);
+  setTimeout(()=>{sp.remove();},1000);
+});
+
+document.addEventListener("click", e=>{
+  // Heart burst on click
+  for(let j=0;j<5;j++){
+    let h=document.createElement("div"); h.innerText="❤️"; h.style.position="absolute"; h.style.left=e.clientX+"px"; h.style.top=e.clientY+"px"; h.style.fontSize=(Math.random()*12+12)+"px"; h.style.opacity=1; h.style.transition="all 0.8s ease-out"; cursorEffects.appendChild(h);
+    setTimeout(()=>{h.style.top=(e.clientY-50-Math.random()*30)+"px"; h.style.opacity=0;},50);
+    setTimeout(()=>{h.remove();},900);
+  }
+});
 </script>
+
 </body>
 </html>
